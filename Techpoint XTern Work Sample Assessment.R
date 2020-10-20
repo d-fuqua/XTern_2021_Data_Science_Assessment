@@ -6,8 +6,8 @@ fullDataSet
 cleanedDataSet = subset(fullDataSet, !(Votes == "-" & Reviews == "-"))
 cleanedDataSet
 
-## Plot the distribution of average ratings to seeif analysis is applicable ##
-plot(cleanedDataSet$Rating)
+## Plot the distribution of average ratings to see if analysis is applicable ##
+plot(cleanedDataSet$Rating, xlab = "Rating", ylab = "Number of Restaurants")
 
 ## Convert cleaned Rating and Votes column into numbers from factor level ##
 class(cleanedDataSet$Rating)
@@ -46,8 +46,8 @@ dataList = list()
 counter = 0
 for (i in 1:dataLength){
   if ("Fast Food" %in% cleanedDataSet$Cuisine[i]) {
-    dataList[[counter]] = cleanedDataSet[i,]
     counter = counter + 1
+    dataList[[counter]] = cleanedDataSet[i,]
   }
 }
 cuisineTypeList = do.call(rbind, dataList)
@@ -74,7 +74,6 @@ cuisineCounter2 = 1
 ## Loop through the data set to find the restaurant ids of the desired type ##
 for (j in 1:cuisineLength) {
   if (factorMinAverageCost %in% cuisineTypeList$Average_Cost[j]) {
-    print("Success")
     costList[[cuisineCounter1]] = cuisineTypeList$ï..Restaurant[j]
     cuisineCounter1 = cuisineCounter1 + 1
   }
@@ -86,6 +85,9 @@ for (j in 1:cuisineLength) {
     highScoreID = cuisineTypeList$ï..Restaurant[j]
   }
 }
+costList
+orderList
+highScoreID
 
 ## Find the restaurant closest to the given restaurant and return score and cooking time ##
 ## Initialize variables. Set givenID to an arbitrary ID in the data set. Can be changed by input from the user ##
@@ -117,3 +119,5 @@ for (l in 1:dataLength) {
 
 closestScore = cleanedDataSet$score[location]
 closestCookTime = cleanedDataSet$Cook_Time[location]
+closestScore
+closestCookTime
